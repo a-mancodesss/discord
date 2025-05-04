@@ -1,7 +1,18 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
+import express from 'express'
+import cors from 'cors'
 import dotenv from "dotenv";
-dotenv.config();
 
+
+dotenv.config();
+const app = express()
+app.use(cors())
+const PORT = 3000 | process.env.PORT
+app.listen(PORT,(req,res)=>{
+    const msg = `Listening on port ${PORT}`
+    console.log(msg)
+    req.json({msg:msg})
+})
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
