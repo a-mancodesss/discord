@@ -6,12 +6,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express()
+app.use(express.json())
 app.use(cors())
 const PORT = 3000 | process.env.PORT
-app.listen(PORT,(req,res)=>{
+app.listen(PORT,()=>{
     const msg = `Listening on port ${PORT}`
     console.log(msg)
-    req.json({msg:msg})
 })
 const client = new Client({
   intents: [
@@ -22,10 +22,7 @@ const client = new Client({
 });
 
 client.on("messageCreate", async (message) => {
-   // to return public ip of the host machine
-  // fetch('https://api.ipify.org?format=json')
-  //   .then(response => response.json())
-  //   .then(data => console.log(data.ip));
+
   if (message.content.toLowerCase() == "hi") {
     message.reply("Hello this is aman-first bot crated at May 4,2025 12:45PM");
   } else if (message.content.toLowerCase() == "quote") {
